@@ -714,11 +714,15 @@ body {
 }
 
 .product-showcase--reverse {
-  direction: rtl;
+  grid-template-columns: 1fr 1fr;
 }
 
-.product-showcase--reverse > * {
-  direction: ltr;
+.product-showcase--reverse .product-showcase__content {
+  order: 2;
+}
+
+.product-showcase--reverse .product-showcase__visual {
+  order: 1;
 }
 
 .product-showcase + .product-showcase {
@@ -803,6 +807,14 @@ body {
 .product-showcase__phone:hover {
   transform: rotateY(0) rotateX(0) translateY(-4px);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.product-showcase--reverse .product-showcase__phone {
+  transform: rotateY(5deg) rotateX(2deg);
+}
+
+.product-showcase--reverse .product-showcase__phone:hover {
+  transform: rotateY(0) rotateX(0) translateY(-4px);
 }
 
 .product-showcase__screen {
@@ -1331,7 +1343,7 @@ body {
   background: none;
   border: none;
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font);
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -1560,18 +1572,6 @@ body {
   position: relative;
   overflow: hidden;
 }
-
-.btn--gold::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.btn--gold:hover::after { opacity: 1; }
 
 .btn--gold:active {
   transform: scale(0.95) translateY(0);
@@ -1877,6 +1877,14 @@ body {
   .product-showcase__phone {
     transform: none;
     width: 280px;
+  }
+
+  .product-showcase--reverse .product-showcase__content {
+    order: 0;
+  }
+
+  .product-showcase--reverse .product-showcase__visual {
+    order: 0;
   }
 
   .portfolio__grid { grid-template-columns: 1fr; }
