@@ -344,28 +344,37 @@ body {
   margin-top: 4px;
 }
 
-.hero__live {
+.portfolio__live {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
-  font-size: 0.85rem;
+  gap: 10px;
+  margin-top: 40px;
+  padding: 16px 28px;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 184, 148, 0.2);
+  background: rgba(0, 184, 148, 0.04);
+  font-size: 0.9rem;
   color: var(--text-3);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-.hero__live-dot {
-  width: 8px;
-  height: 8px;
+.portfolio__live-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #00B894;
-  animation: livePulse 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
+  animation: livePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(0, 184, 148, 0.5);
+  flex-shrink: 0;
 }
 
 @keyframes livePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 12px rgba(0, 184, 148, 0.5); }
+  50% { opacity: 0.4; transform: scale(0.7); box-shadow: 0 0 4px rgba(0, 184, 148, 0.2); }
 }
 
 @keyframes orbFloat {
@@ -826,7 +835,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: end;
+  align-items: start;
   overflow: visible;
 }
 
@@ -839,11 +848,21 @@ body {
               border-color 0.4s ease,
               box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .price-card:first-child,
 .price-card:last-child {
   transform: translateY(0);
+}
+
+.price-card:not(.price-card--featured) .price-card__list {
+  flex: 1;
+}
+
+.price-card:not(.price-card--featured) .price-card__btn {
+  margin-top: auto;
 }
 
 .price-card::before {
@@ -869,7 +888,7 @@ body {
 .price-card--featured:hover {
   border-color: var(--gold);
   box-shadow: 0 16px 50px rgba(212, 175, 55, 0.15);
-  transform: translateY(-4px);
+  transform: translateY(12px);
 }
 
 .price-card:not(.price-card--featured):hover {
@@ -882,6 +901,8 @@ body {
   box-shadow: 0 8px 40px rgba(212, 175, 55, 0.1);
   padding: 48px 28px 36px;
   z-index: 2;
+  transform: translateY(20px);
+}
 }
 
 .price-card__badge {
