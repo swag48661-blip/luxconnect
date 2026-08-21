@@ -898,7 +898,7 @@ body {
 
 .price-card--featured {
   border-color: var(--gold);
-  background: var(--bg);
+  background: var(--surface);
   box-shadow: 0 8px 40px rgba(212, 175, 55, 0.1);
   padding: 48px 28px 36px;
   z-index: 2;
