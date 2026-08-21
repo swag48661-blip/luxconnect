@@ -854,8 +854,16 @@ body {
 .price-card:hover::before { opacity: 1; }
 
 .price-card:hover {
-  border-color: var(--border-2);
   transform: translateY(-4px);
+}
+
+.price-card--featured:hover {
+  border-color: var(--gold);
+  box-shadow: 0 16px 50px rgba(212, 175, 55, 0.15);
+}
+
+.price-card:not(.price-card--featured):hover {
+  border-color: var(--border-2);
 }
 
 .price-card--featured {
