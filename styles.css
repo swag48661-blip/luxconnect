@@ -603,6 +603,78 @@ body {
   color: var(--text-3);
 }
 
+/* ========== PROCESS ========== */
+.process__grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.process-step {
+  text-align: center;
+  padding: 0 20px;
+  max-width: 200px;
+}
+
+.process-step__num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gold);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.process-step__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(212, 175, 55, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--gold);
+  transition: border-color 0.4s, box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process-step__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.process-step:hover .process-step__icon {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+  transform: scale(1.08);
+}
+
+.process-step__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.process-step__desc {
+  font-size: 0.82rem;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+.process-step__line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-2), rgba(212, 175, 55, 0.3), var(--border-2));
+  flex-shrink: 0;
+  margin-top: 56px;
+}
+
 /* ========== PRODUCTS ========== */
 .product-showcase {
   display: grid;
@@ -1689,6 +1761,9 @@ body {
   50% { left: 120%; }
 }
 @media (max-width: 1024px) {
+  .process__grid { flex-wrap: wrap; gap: 8px; }
+  .process-step__line { width: 40px; margin-top: 48px; }
+  .process-step { max-width: 180px; padding: 0 12px; }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .pricing__grid { grid-template-columns: repeat(2, 1fr); }
   .pricing__grid .price-card:last-child {
@@ -1744,6 +1819,18 @@ body {
   .hero__content { padding: 100px 16px 60px; }
 
   .hero__stats { gap: 12px; }
+
+  .process__grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .process-step__line {
+    width: 1px;
+    height: 32px;
+    margin: 0;
+    background: linear-gradient(180deg, var(--border-2), rgba(212, 175, 55, 0.3), var(--border-2));
+  }
 
   .services__grid { grid-template-columns: 1fr; }
 
