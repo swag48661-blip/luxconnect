@@ -810,7 +810,7 @@ body {
 }
 
 .product-showcase--reverse .product-showcase__phone {
-  transform: rotateY(5deg) rotateX(2deg);
+  transform: rotateY(-5deg) rotateX(2deg);
 }
 
 .product-showcase--reverse .product-showcase__phone:hover {
