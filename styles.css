@@ -344,6 +344,30 @@ body {
   margin-top: 4px;
 }
 
+.hero__live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+
+.hero__live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00B894;
+  animation: livePulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0); }
   33% { transform: translate(30px, -30px); }
