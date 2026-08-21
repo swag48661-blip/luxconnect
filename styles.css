@@ -890,6 +890,15 @@ body {
   gap: 24px;
 }
 
+a.portfolio-card,
+a.portfolio-card:hover,
+a.portfolio-card:focus,
+a.portfolio-card:visited,
+a.portfolio-card:active {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .portfolio-card {
   background: var(--surface);
   border: 1px solid var(--border);
