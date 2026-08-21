@@ -18,18 +18,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ========== SCROLL ARROW CLICK ==========
-  var scrollArrow = document.querySelector('.hero__scroll');
-  if (scrollArrow) {
-    scrollArrow.addEventListener('click', function() {
-      var target = document.getElementById('services');
-      if (target) {
-        var top = target.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-    });
-  }
-
   // ========== MOBILE MENU ==========
   const burger = document.getElementById('navBurger');
   const navLinks = document.getElementById('navLinks');

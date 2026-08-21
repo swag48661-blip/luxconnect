@@ -274,21 +274,26 @@ body {
 
 .hero__stats {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .hero__stat {
   text-align: center;
   text-decoration: none;
-  display: block;
-  padding: 16px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
+  min-width: 150px;
+  flex: 1;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.4s ease,
               background 0.4s ease,
@@ -323,45 +328,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: 4px;
-}
-
-.hero__stat-divider {
-  width: 1px;
-  height: 40px;
-  background: var(--border-2);
-}
-
-.hero__scroll {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: var(--text-3);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.hero__scroll:hover {
-  color: var(--gold);
-}
-
-.hero__scroll-arrow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: scrollBounce 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  transition: color 0.4s;
-}
-
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.5; }
 }
 
 @keyframes orbFloat {
@@ -1549,8 +1515,7 @@ body {
 
   .hero__content { padding: 100px 16px 60px; }
 
-  .hero__stats { gap: 20px; }
-  .hero__stat-divider { display: none; }
+  .hero__stats { gap: 12px; }
 
   .services__grid { grid-template-columns: 1fr; }
 
