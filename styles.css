@@ -916,6 +916,9 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .portfolio-card:hover {
