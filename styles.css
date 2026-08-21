@@ -1,28 +1,28 @@
 :root {
-  --bg: #050505;
-  --bg-2: #0c0c0c;
-  --bg-3: #141414;
-  --bg-4: #1c1c1c;
-  --surface: #111111;
-  --surface-2: #1a1a1a;
-  --border: #222222;
-  --border-2: #2a2a2a;
-  --text: #f0f0f0;
-  --text-2: #b0b0b0;
-  --text-3: #707070;
+  --bg: #000000;
+  --bg-2: #0a0a0a;
+  --bg-3: #111111;
+  --bg-4: #1a1a1a;
+  --surface: rgba(28, 28, 30, 0.8);
+  --surface-2: #2c2c2e;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-2: rgba(255, 255, 255, 0.12);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #6e6e73;
   --gold: #D4AF37;
   --gold-light: #E8CC6E;
   --gold-dark: #B8960E;
-  --gold-glow: rgba(212, 175, 55, 0.15);
-  --gold-glow-2: rgba(212, 175, 55, 0.08);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
+  --gold-glow: rgba(212, 175, 55, 0.12);
+  --gold-glow-2: rgba(212, 175, 55, 0.06);
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-xs: 10px;
   --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   --transition-slow: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', 'SF Pro Display', sans-serif;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
