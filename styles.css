@@ -479,7 +479,7 @@ body {
 
 /* ========== SERVICES ========== */
 .services {
-  background: var(--bg-2);
+  background: var(--bg);
 }
 
 .services__grid {
@@ -739,7 +739,7 @@ body {
 
 /* ========== PORTFOLIO ========== */
 .portfolio {
-  background: var(--bg-2);
+  background: var(--bg);
 }
 
 .portfolio__grid {
@@ -835,8 +835,9 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   overflow: visible;
+  padding-bottom: 24px;
 }
 
 .price-card {
@@ -897,12 +898,17 @@ body {
 
 .price-card--featured {
   border-color: var(--gold);
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.04), var(--surface));
+  background: var(--bg);
   box-shadow: 0 8px 40px rgba(212, 175, 55, 0.1);
   padding: 48px 28px 36px;
   z-index: 2;
   transform: translateY(20px);
 }
+
+.price-card--featured:hover {
+  border-color: var(--gold);
+  box-shadow: 0 16px 50px rgba(212, 175, 55, 0.15);
+  transform: translateY(12px);
 }
 
 .price-card__badge {
@@ -1009,7 +1015,7 @@ body {
 
 /* ========== REVIEWS ========== */
 .reviews {
-  background: var(--bg-2);
+  background: var(--bg);
 }
 
 .reviews__grid {
@@ -1246,7 +1252,7 @@ body {
   padding: 12px 16px;
   border-radius: var(--radius-xs);
   border: 1px solid var(--border);
-  background: var(--bg-2);
+  background: var(--bg);
   color: var(--text);
   font-family: var(--font);
   font-size: 0.9rem;
@@ -1677,7 +1683,7 @@ body {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: var(--bg-2);
+    background: var(--bg);
     border-left: 1px solid var(--border);
     flex-direction: column;
     padding: 80px 24px 32px;
