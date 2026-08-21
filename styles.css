@@ -802,8 +802,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
-  padding-top: 16px;
+  align-items: end;
   overflow: visible;
 }
 
@@ -820,7 +819,7 @@ body {
 
 .price-card:first-child,
 .price-card:last-child {
-  transform: translateY(-8px);
+  transform: translateY(0);
 }
 
 .price-card::before {
@@ -840,13 +839,13 @@ body {
 .price-card:hover::before { opacity: 1; }
 
 .price-card:hover {
-  transform: translateY(-4px) !important;
+  transform: translateY(-4px);
 }
 
 .price-card--featured:hover {
   border-color: var(--gold);
   box-shadow: 0 16px 50px rgba(212, 175, 55, 0.15);
-  transform: translateY(0) !important;
+  transform: translateY(-4px);
 }
 
 .price-card:not(.price-card--featured):hover {
@@ -857,7 +856,7 @@ body {
   border-color: var(--gold);
   background: linear-gradient(180deg, rgba(212, 175, 55, 0.04), var(--surface));
   box-shadow: 0 8px 40px rgba(212, 175, 55, 0.1);
-  transform: translateY(4px);
+  padding: 48px 28px 36px;
   z-index: 2;
 }
 
@@ -1101,6 +1100,70 @@ body {
 }
 
 .contact__response-icon { color: #00B894; flex-shrink: 0; }
+
+/* ========== FAQ ========== */
+.faq__list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.faq-item:hover { border-color: var(--border-2); }
+.faq-item.active { border-color: rgba(212, 175, 55, 0.3); }
+
+.faq-item__q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-item__q span { flex: 1; }
+
+.faq-item__icon {
+  color: var(--text-3);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-item__icon {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+
+.faq-item__a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item.active .faq-item__a { max-height: 200px; }
+
+.faq-item__a p {
+  padding: 0 24px 20px;
+  font-size: 0.88rem;
+  color: var(--text-3);
+  line-height: 1.6;
+}
 
 .contact__response-title {
   font-size: 0.75rem;
@@ -1484,7 +1547,62 @@ body {
 .reviews__grid .review-card:nth-child(2) { transition-delay: 0.12s; }
 .reviews__grid .review-card:nth-child(3) { transition-delay: 0.19s; }
 
-/* ========== RESPONSIVE ========== */
+/* ========== SCROLL TO TOP ========== */
+.scroll-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s, border-color 0.3s, box-shadow 0.4s;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+}
+
+/* ========== SHIMMER BUTTONS ========== */
+.btn--gold {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { left: -100%; }
+  50% { left: 120%; }
+}
 @media (max-width: 1024px) {
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .pricing__grid { grid-template-columns: repeat(2, 1fr); }

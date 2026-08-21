@@ -28,6 +28,7 @@
         <a href="#portfolio" class="nav__link">Портфолио</a>
         <a href="#pricing" class="nav__link">Цены</a>
         <a href="#reviews" class="nav__link">Отзывы</a>
+        <a href="#faq" class="nav__link">FAQ</a>
         <a href="#contact" class="nav__link nav__link--cta">Связаться</a>
       </div>
       <button class="nav__burger" id="navBurger" aria-label="Меню">
@@ -428,6 +429,63 @@
     </div>
   </section>
 
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section__header anim">
+        <span class="section__tag">Вопросы</span>
+        <h2 class="section__title">Часто задаваемые</h2>
+        <p class="section__sub">Ответы на популярные вопросы</p>
+      </div>
+      <div class="faq__list">
+        <div class="faq-item anim">
+          <button class="faq-item__q">
+            <span>Сколько времени занимает разработка?</span>
+            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__a">
+            <p>От 2 до 14 дней в зависимости от тарифа. Старт — 2-3 дня, Бизнес — 5-7 дней, Максимум — 10-14 дней.</p>
+          </div>
+        </div>
+        <div class="faq-item anim">
+          <button class="faq-item__q">
+            <span>Какие способы оплаты принимаете?</span>
+            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__a">
+            <p>Карта (Сбер, Тинькофф), Telegram Stars, криптовалюта. Оплата после согласования ТЗ — предоплата 50%.</p>
+          </div>
+        </div>
+        <div class="faq-item anim">
+          <button class="faq-item__q">
+            <span>Что входит в поддержку?</span>
+            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__a">
+            <p>Исправление багов, консультации, мелкие доработки. Срок: от 5 до 30 дней бесплатно. Далее — по договорённости.</p>
+          </div>
+        </div>
+        <div class="faq-item anim">
+          <button class="faq-item__q">
+            <span>Можно ли доработать бота после запуска?</span>
+            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__a">
+            <p>Да, всегда. Новые функции, интеграции, изменения дизайна — обсудим сроки и стоимость, сделаем.</p>
+          </div>
+        </div>
+        <div class="faq-item anim">
+          <button class="faq-item__q">
+            <span>Как я получаю бота после оплаты?</span>
+            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__a">
+            <p>Получаете исходный код + инструкцию по запуску. Если бот на Cloudflare — деплой за 10 минут по нашей инструкции.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section contact" id="contact">
     <div class="container">
       <div class="section__header anim">
@@ -505,6 +563,10 @@
   </footer>
 
   <div class="toast" id="toast"></div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 
   <script src="script.js"></script>
 </body>

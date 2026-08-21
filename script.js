@@ -220,4 +220,32 @@
     });
   }
 
+  // ========== FAQ ACCORDION ==========
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item) {
+    var btn = item.querySelector('.faq-item__q');
+    if (btn) {
+      btn.addEventListener('click', function() {
+        var isActive = item.classList.contains('active');
+        faqItems.forEach(function(i) { i.classList.remove('active'); });
+        if (!isActive) item.classList.add('active');
+      });
+    }
+  });
+
+  // ========== SCROLL TO TOP ==========
+  var scrollTopBtn = document.getElementById('scrollTop');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 600) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
 })();
