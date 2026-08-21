@@ -713,6 +713,20 @@ body {
   align-items: center;
 }
 
+.product-showcase--reverse {
+  direction: rtl;
+}
+
+.product-showcase--reverse > * {
+  direction: ltr;
+}
+
+.product-showcase + .product-showcase {
+  margin-top: 60px;
+  padding-top: 60px;
+  border-top: 1px solid var(--border);
+}
+
 .product-showcase__badge {
   display: inline-block;
   padding: 6px 14px;
