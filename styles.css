@@ -1367,7 +1367,7 @@ a.portfolio-card:active {
   transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.faq-item.active .faq-item__a { max-height: 200px; }
+.faq-item.active .faq-item__a { max-height: 100px; }
 
 .faq-item__a p {
   padding: 0 24px 20px;
