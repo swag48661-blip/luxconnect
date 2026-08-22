@@ -1367,13 +1367,50 @@ a.portfolio-card:active {
   transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.faq-item.active .faq-item__a { max-height: 100px; }
+.faq-item.active .faq-item__a { max-height: 300px; }
 
 .faq-item__a p {
   padding: 0 24px 20px;
   font-size: 0.88rem;
   color: var(--text-3);
   line-height: 1.6;
+}
+
+.faq-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px 24px 20px;
+}
+
+.faq-answer__header {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.faq-answer__item {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  padding: 5px 0;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.faq-answer__item:last-of-type {
+  border-bottom: none;
+}
+
+.faq-answer__footer {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
 }
 
 .contact__response-title {
