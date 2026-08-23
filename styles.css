@@ -990,69 +990,115 @@ a.portfolio-card:active {
   color: var(--gold);
 }
 
-/* ========== PORTFOLIO FILTER TABS ========== */
-.portfolio__tabs {
-  display: inline-flex;
+/* ========== PORTFOLIO LEGEND ========== */
+.portfolio__legend {
+  display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 28px;
   flex-wrap: wrap;
-  margin: -24px 0 36px;
-  padding: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 100px;
+  margin: -16px 0 48px;
 }
 
-.pf-tab {
+.pf-legend-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border: 0;
-  border-radius: 100px;
-  background: transparent;
-  color: var(--text-2);
-  font-family: inherit;
+  gap: 10px;
   font-size: 0.82rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  color: var(--text-2);
 }
 
-.pf-tab:hover { color: var(--text); }
+.pf-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 
-.pf-tab.active {
+.pf-dot--bot {
+  background: #6c5ce7;
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.18);
+}
+
+.pf-dot--site {
   background: var(--gold);
-  color: #0c0c0a;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.18);
 }
 
-.pf-count {
+/* ========== PORTFOLIO GROUPS ========== */
+.pf-group { margin-bottom: 52px; }
+.pf-group:last-child { margin-bottom: 0; }
+
+.pf-group__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pf-group__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pf-group__ic {
   display: inline-grid;
   place-items: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.pf-group__count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  background: var(--gold-glow-2);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 6px 14px;
   border-radius: 100px;
-  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+/* ========== PORTFOLIO BADGES ========== */
+.pf-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 0.62rem;
   font-weight: 800;
-  background: var(--border-2);
-  color: var(--text-2);
-  transition: background 0.3s ease, color 0.3s ease;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
 }
 
-.pf-tab.active .pf-count {
-  background: rgba(12, 12, 10, 0.14);
-  color: #0c0c0a;
+.pf-badge--bot {
+  color: #b3a7f7;
+  background: rgba(108, 92, 231, 0.16);
+  border: 1px solid rgba(108, 92, 231, 0.4);
 }
 
-.portfolio-card.pf-hidden { display: none; }
-
-.portfolio-card.pf-anim-in { animation: pf-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-
-@keyframes pf-in {
-  from { opacity: 0; transform: translateY(22px) scale(0.96); }
-  to { opacity: 1; transform: none; }
+.pf-badge--site {
+  color: var(--gold-hi);
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 /* ========== PRICING ========== */
@@ -1914,9 +1960,9 @@ a.portfolio-card:active {
     margin: 0 auto;
   }
   .portfolio__grid { grid-template-columns: repeat(2, 1fr); }
-  .portfolio__grid .portfolio-card:last-child {
+  .pf-group:last-child .portfolio__grid .portfolio-card {
     grid-column: span 2;
-    max-width: 400px;
+    max-width: 440px;
     margin: 0 auto;
   }
   .reviews__grid { grid-template-columns: repeat(2, 1fr); }
@@ -1980,7 +2026,7 @@ a.portfolio-card:active {
   }
 
   .portfolio__grid { grid-template-columns: 1fr; }
-  .portfolio__grid .portfolio-card:last-child {
+  .pf-group:last-child .portfolio__grid .portfolio-card {
     grid-column: auto;
     max-width: none;
   }

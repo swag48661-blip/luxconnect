@@ -233,44 +233,6 @@
     }
   });
 
-  // ========== PORTFOLIO FILTER TABS ==========
-  var pfTabs = document.querySelectorAll('#portfolioTabs .pf-tab');
-  var pfCards = document.querySelectorAll('#portfolioGrid .portfolio-card');
-  var pfCounts = {};
-
-  if (pfTabs.length && pfCards.length) {
-    pfCards.forEach(function(card) {
-      var cat = card.getAttribute('data-category');
-      if (!pfCounts[cat]) pfCounts[cat] = 0;
-      pfCounts[cat]++;
-    });
-
-    function pfApply(filter) {
-      pfCards.forEach(function(card, i) {
-        var cat = card.getAttribute('data-category');
-        var show = filter === 'all' || cat === filter;
-        card.classList.toggle('pf-hidden', !show);
-        if (show) {
-          card.classList.remove('pf-anim-in');
-          card.style.animationDelay = (i * 0.06) + 's';
-          void card.offsetWidth;
-          card.classList.add('pf-anim-in');
-        }
-      });
-      pfTabs.forEach(function(t) {
-        t.classList.toggle('active', t.getAttribute('data-filter') === filter);
-      });
-    }
-
-    pfTabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        pfApply(tab.getAttribute('data-filter'));
-      });
-    });
-
-    pfApply('all');
-  }
-
   // ========== SCROLL TO TOP ==========
   var scrollTopBtn = document.getElementById('scrollTop');
   if (scrollTopBtn) {

@@ -421,54 +421,72 @@
         <h2 class="section__title">Наши проекты</h2>
         <p class="section__sub">От Telegram-ботов до лендингов — каждый проект решает задачу бизнеса</p>
       </div>
-      <div class="portfolio__tabs anim" id="portfolioTabs">
-        <button class="pf-tab active" data-filter="all">Все<span class="pf-count">3</span></button>
-        <button class="pf-tab" data-filter="bot">Telegram-боты<span class="pf-count">2</span></button>
-        <button class="pf-tab" data-filter="landing">Лендинги<span class="pf-count">1</span></button>
+      <div class="portfolio__legend anim">
+        <div class="pf-legend-item"><span class="pf-dot pf-dot--bot"></span>Telegram-бот / мини-апп</div>
+        <div class="pf-legend-item"><span class="pf-dot pf-dot--site"></span>Сайт / лендинг</div>
       </div>
-      <div class="portfolio__grid" id="portfolioGrid">
-        <a href="#lux-planner" data-category="bot" class="portfolio-card anim">
-          <div class="portfolio-card__preview" style="--accent: #D4AF37">
-            <div class="portfolio-card__icon">
-              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 24l6 6 10-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+      <div class="pf-group anim">
+        <div class="pf-group__head">
+          <h3 class="pf-group__title"><span class="pf-group__ic">🤖</span>Telegram-боты и мини-аппы</h3>
+          <span class="pf-group__count">2 проекта</span>
+        </div>
+        <div class="portfolio__grid">
+          <a href="#lux-planner" class="portfolio-card anim">
+            <div class="portfolio-card__preview" style="--accent: #D4AF37">
+              <span class="pf-badge pf-badge--bot">Бот</span>
+              <div class="portfolio-card__icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 24l6 6 10-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Lux Planner</h3>
-            <p class="portfolio-card__desc">Планировщик жизни с ИИ, 8 модулей, монетизация</p>
-            <div class="portfolio-card__tech">
-              <span>Cloudflare Workers</span><span>D1</span><span>Bot API</span><span>WebApp</span>
+            <div class="portfolio-card__body">
+              <h3 class="portfolio-card__title">Lux Planner</h3>
+              <p class="portfolio-card__desc">Планировщик жизни с ИИ, 8 модулей, монетизация</p>
+              <div class="portfolio-card__tech">
+                <span>Cloudflare Workers</span><span>D1</span><span>Bot API</span><span>WebApp</span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a href="#lux-suggestion" data-category="bot" class="portfolio-card anim">
-          <div class="portfolio-card__preview" style="--accent: #6C5CE7">
-            <div class="portfolio-card__icon">
-              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 18h16M16 24h10M16 30h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </a>
+          <a href="#lux-suggestion" class="portfolio-card anim">
+            <div class="portfolio-card__preview" style="--accent: #6C5CE7">
+              <span class="pf-badge pf-badge--bot">Бот</span>
+              <div class="portfolio-card__icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 18h16M16 24h10M16 30h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Lux Suggestion</h3>
-            <p class="portfolio-card__desc">Бот для связи с клиентами, предложка, спамблок</p>
-            <div class="portfolio-card__tech">
-              <span>Cloudflare Workers</span><span>D1</span><span>Bot API</span>
+            <div class="portfolio-card__body">
+              <h3 class="portfolio-card__title">Lux Suggestion</h3>
+              <p class="portfolio-card__desc">Бот для связи с клиентами, предложка, спамблок</p>
+              <div class="portfolio-card__tech">
+                <span>Cloudflare Workers</span><span>D1</span><span>Bot API</span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a href="https://swag48661-blip.github.io/fitness-landing/" target="_blank" rel="noopener" data-category="landing" class="portfolio-card anim">
-          <div class="portfolio-card__preview" style="--accent: #F4C400">
-            <div class="portfolio-card__icon">
-              <svg viewBox="0 0 48 48" fill="none"><path d="M4 24h9l4-9 7 18 5-13 3 4h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pf-group anim">
+        <div class="pf-group__head">
+          <h3 class="pf-group__title"><span class="pf-group__ic">🌐</span>Лендинги и сайты</h3>
+          <span class="pf-group__count">1 проект</span>
+        </div>
+        <div class="portfolio__grid">
+          <a href="https://swag48661-blip.github.io/fitness-landing/" target="_blank" rel="noopener" class="portfolio-card anim">
+            <div class="portfolio-card__preview" style="--accent: #F4C400">
+              <span class="pf-badge pf-badge--site">Сайт</span>
+              <div class="portfolio-card__icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M4 24h9l4-9 7 18 5-13 3 4h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Pulse Fit</h3>
-            <p class="portfolio-card__desc">Лендинг фитнес-клуба для привлечения клиентов: дизайн, вёрстка, запись через Telegram</p>
-            <div class="portfolio-card__tech">
-              <span>HTML/CSS</span><span>GitHub Pages</span><span>Telegram</span><span>Web</span>
+            <div class="portfolio-card__body">
+              <h3 class="portfolio-card__title">Pulse Fit</h3>
+              <p class="portfolio-card__desc">Лендинг фитнес-клуба для привлечения клиентов: дизайн, вёрстка, запись через Telegram</p>
+              <div class="portfolio-card__tech">
+                <span>HTML/CSS</span><span>GitHub Pages</span><span>Telegram</span><span>Web</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   </section>
