@@ -419,10 +419,15 @@
       <div class="section__header anim">
         <span class="section__tag">Портфолио</span>
         <h2 class="section__title">Наши проекты</h2>
-        <p class="section__sub">Каждый проект — от идеи до запуска</p>
+        <p class="section__sub">От Telegram-ботов до лендингов — каждый проект решает задачу бизнеса</p>
       </div>
-      <div class="portfolio__grid">
-        <a href="#lux-planner" class="portfolio-card anim">
+      <div class="portfolio__tabs anim" id="portfolioTabs">
+        <button class="pf-tab active" data-filter="all">Все<span class="pf-count">3</span></button>
+        <button class="pf-tab" data-filter="bot">Telegram-боты<span class="pf-count">2</span></button>
+        <button class="pf-tab" data-filter="landing">Лендинги<span class="pf-count">1</span></button>
+      </div>
+      <div class="portfolio__grid" id="portfolioGrid">
+        <a href="#lux-planner" data-category="bot" class="portfolio-card anim">
           <div class="portfolio-card__preview" style="--accent: #D4AF37">
             <div class="portfolio-card__icon">
               <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 24l6 6 10-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -436,7 +441,7 @@
             </div>
           </div>
         </a>
-        <a href="#lux-suggestion" class="portfolio-card anim">
+        <a href="#lux-suggestion" data-category="bot" class="portfolio-card anim">
           <div class="portfolio-card__preview" style="--accent: #6C5CE7">
             <div class="portfolio-card__icon">
               <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/><path d="M16 18h16M16 24h10M16 30h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
@@ -450,7 +455,7 @@
             </div>
           </div>
         </a>
-        <a href="https://swag48661-blip.github.io/fitness-landing/" target="_blank" rel="noopener" class="portfolio-card anim">
+        <a href="https://swag48661-blip.github.io/fitness-landing/" target="_blank" rel="noopener" data-category="landing" class="portfolio-card anim">
           <div class="portfolio-card__preview" style="--accent: #F4C400">
             <div class="portfolio-card__icon">
               <svg viewBox="0 0 48 48" fill="none"><path d="M4 24h9l4-9 7 18 5-13 3 4h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
