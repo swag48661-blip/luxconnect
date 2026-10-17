@@ -1,249 +1,219 @@
-(function() {
+/* ============================================================
+   Lux.connect — interactions
+   ============================================================ */
+(function () {
   'use strict';
 
-  // ========== NAV SCROLL ==========
-  const nav = document.getElementById('nav');
-  let lastScroll = 0;
+  var $  = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ---------- прогресс, шапка, кнопки ---------- */
+  var nav = $('#nav');
+  var bar = $('#progressBar');
+  var toTop = $('#scrollTop');
+  var mobileCta = $('#mobileCta');
 
   function onScroll() {
-    const y = window.scrollY;
-    if (y > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-    lastScroll = y;
-  }
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
 
+    if (bar) bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    if (nav) nav.classList.toggle('scrolled', y > 24);
+    if (toTop) toTop.classList.toggle('is-visible', y > 700);
+    if (mobileCta) mobileCta.classList.toggle('is-visible', y > 500);
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ========== MOBILE MENU ==========
-  const burger = document.getElementById('navBurger');
-  const navLinks = document.getElementById('navLinks');
+  /* ---------- мобильное меню ---------- */
+  var burger = $('#navBurger');
+  var links = $('#navLinks');
 
-  if (burger && navLinks) {
-    burger.addEventListener('click', function() {
-      burger.classList.toggle('active');
-      navLinks.classList.toggle('open');
-      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  function closeMenu() {
+    if (!burger || !links) return;
+    burger.classList.remove('is-open');
+    links.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = !links.classList.contains('is-open');
+      burger.classList.toggle('is-open', open);
+      links.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
     });
+    $$('.nav__link', links).forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+  }
 
-    navLinks.querySelectorAll('.nav__link').forEach(function(link) {
-      link.addEventListener('click', function() {
-        burger.classList.remove('active');
-        navLinks.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+  /* ---------- плавный скролл с учётом липкой шапки ---------- */
+  $$('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (!id || id === '#') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      /* на file:// браузер может запретить правку истории — не критично */
+      try { history.replaceState(null, '', id); } catch (err) { /* игнорируем */ }
+    });
+  });
+
+  /* ---------- появление блоков ---------- */
+  var anims = $$('.anim');
+
+  function reveal(el) {
+    if (el.classList.contains('is-visible')) return;
+    el.classList.add('is-visible');
+  }
+
+  function revealInView() {
+    anims.forEach(function (el) {
+      if (el.classList.contains('is-visible')) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight - 30 && r.bottom > -30) reveal(el);
     });
   }
 
-  // ========== SCROLL ANIMATIONS ==========
-  var animEls = document.querySelectorAll('.anim');
   if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { reveal(en.target); io.unobserve(en.target); }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    animEls.forEach(function(el) { observer.observe(el); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    anims.forEach(function (el) { io.observe(el); });
   } else {
-    animEls.forEach(function(el) { el.classList.add('visible'); });
+    anims.forEach(reveal);
   }
 
-  // ========== COUNTER ANIMATION ==========
-  var counters = document.querySelectorAll('[data-count]');
-  if (counters.length && 'IntersectionObserver' in window) {
-    var counterObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
+  /* страховка на случай, если observer не сработал */
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; revealInView(); });
+  }, { passive: true });
+
+  window.addEventListener('load', revealInView);
+  window.addEventListener('resize', revealInView);
+
+  /* страховочная сетка: даже если observer заглох — блоки всё равно появятся */
+  var netTimer = setInterval(revealInView, 900);
+  setTimeout(function () { clearInterval(netTimer); revealInView(); }, 12000);
+
+  /* ---------- активный пункт меню ---------- */
+  var sections = $$('main section[id]');
+  var navAnchors = $$('.nav__link[href^="#"]');
+  if (sections.length && navAnchors.length && 'IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = '#' + en.target.id;
+        navAnchors.forEach(function (a) {
+          a.classList.toggle('is-active', a.getAttribute('href') === id);
+        });
       });
-    }, { threshold: 0.1 });
-
-    counters.forEach(function(el) { counterObserver.observe(el); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { sio.observe(s); });
   }
 
-  function animateCounter(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10);
-    var duration = 1500;
-    var start = performance.now();
-
-    function step(now) {
-      var progress = Math.min((now - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = target;
-      }
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
-  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        var offset = 80;
-        var top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: top, behavior: 'smooth' });
+  /* ---------- аккордеон ---------- */
+  $$('.acc').forEach(function (item) {
+    var q = $('.acc__q', item);
+    var a = $('.acc__a', item);
+    if (!q || !a) return;
+    q.addEventListener('click', function () {
+      var isOpen = item.classList.contains('is-open');
+      $$('.acc').forEach(function (other) {
+        other.classList.remove('is-open');
+        var oa = $('.acc__a', other);
+        var oq = $('.acc__q', other);
+        if (oa) oa.style.maxHeight = '0px';
+        if (oq) oq.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
       }
     });
   });
 
-  // ========== CONTACT FORM ==========
-  var form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var name = document.getElementById('name').value.trim();
-      var telegram = document.getElementById('telegram').value.trim();
-      var project = document.getElementById('project').value.trim();
+  /* ---------- фильтр работ ---------- */
+  var chips = $$('.chip[data-filter]');
+  var cards = $$('#portfolioGrid .pcard');
+  if (chips.length && cards.length) {
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var f = chip.getAttribute('data-filter');
+        chips.forEach(function (c) { c.classList.toggle('chip--active', c === chip); });
 
-      if (!name || !telegram || !project) {
-        showToast('Заполните все поля');
+        cards.forEach(function (card) {
+          var show = f === 'all' || card.getAttribute('data-cat') === f;
+          card.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+
+          if (show) {
+            card.classList.remove('is-hidden');
+            card.style.opacity = '';
+            card.style.transform = '';
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.98)';
+            setTimeout(function () {
+              card.classList.add('is-hidden');
+              card.style.opacity = '';
+              card.style.transform = '';
+            }, 220);
+          }
+        });
+      });
+    });
+  }
+
+  /* ---------- всплывающая подсказка ---------- */
+  var toastEl = $('#toast');
+  var toastTimer;
+  function toast(text) {
+    if (!toastEl) return;
+    clearTimeout(toastTimer);
+    toastEl.textContent = text;
+    toastEl.classList.add('is-visible');
+    toastTimer = setTimeout(function () { toastEl.classList.remove('is-visible'); }, 4000);
+  }
+
+  /* ---------- форма → Telegram ---------- */
+  var form = $('#contactForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = ($('#name') || {}).value || '';
+      var tg = ($('#telegram') || {}).value || '';
+      var project = ($('#project') || {}).value || '';
+
+      if (!name.trim() || !tg.trim() || !project.trim()) {
+        toast('Заполните все поля');
         return;
       }
 
-      var msg = 'Заявка с Lux.connect\n\nИмя: ' + name + '\nTelegram: ' + telegram + '\nПроект:\n' + project;
-      var url = 'https://t.me/userquack?text=' + encodeURIComponent(msg);
-      window.open(url, '_blank');
-      showToast('Открой Telegram и отправь сообщение');
+      var text = 'Заявка с Lux.connect\n\n' +
+                 'Имя: ' + name.trim() + '\n' +
+                 'Telegram: ' + tg.trim() + '\n' +
+                 'Задача:\n' + project.trim();
+
+      window.open('https://t.me/userquack?text=' + encodeURIComponent(text), '_blank');
+      toast('Открываем Telegram — отправьте сообщение');
       form.reset();
     });
   }
 
-  // ========== TOAST ==========
-  var toastEl = document.getElementById('toast');
-  var toastTimeout;
-
-  function showToast(msg) {
-    if (!toastEl) return;
-    clearTimeout(toastTimeout);
-    toastEl.textContent = msg;
-    toastEl.classList.add('show');
-    toastTimeout = setTimeout(function() {
-      toastEl.classList.remove('show');
-    }, 3500);
-  }
-
-  // ========== ACTIVE NAV LINK ON SCROLL ==========
-  var sections = document.querySelectorAll('section[id]');
-  var navLinksAll = document.querySelectorAll('.nav__link[href^="#"]');
-
-  function updateActiveLink() {
-    var scrollPos = window.scrollY + 120;
-    sections.forEach(function(section) {
-      var top = section.offsetTop;
-      var height = section.offsetHeight;
-      var id = section.getAttribute('id');
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinksAll.forEach(function(link) {
-          link.style.color = '';
-          if (link.getAttribute('href') === '#' + id) {
-            link.style.color = 'var(--gold)';
-          }
-        });
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-  updateActiveLink();
-
-  // ========== CURSOR GLOW TRACKING ==========
-  var glowCards = document.querySelectorAll('.service-card, .price-card, .review-card, .portfolio-card, .contact__channel');
-  glowCards.forEach(function(card) {
-    card.addEventListener('mousemove', function(e) {
-      var rect = card.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      card.style.setProperty('--mx', x + 'px');
-      card.style.setProperty('--my', y + 'px');
-    });
-  });
-
-  // ========== PHONE MOCKUP ANIMATION ==========
-  var phoneMsg1 = document.getElementById('phoneMsg1');
-  var phoneReply1 = document.getElementById('phoneReply1');
-  var phoneTyping = document.getElementById('phoneTyping');
-  var phoneReply2 = document.getElementById('phoneReply2');
-
-  if (phoneMsg1) {
-    phoneMsg1.addEventListener('click', function() {
-      phoneMsg1.style.pointerEvents = 'none';
-      phoneMsg1.style.opacity = '0.6';
-
-      setTimeout(function() {
-        phoneReply1.style.display = '';
-        phoneReply1.style.opacity = '0';
-        phoneReply1.style.transform = 'translateY(8px)';
-        requestAnimationFrame(function() {
-          phoneReply1.style.transition = 'all 0.3s ease';
-          phoneReply1.style.opacity = '1';
-          phoneReply1.style.transform = 'translateY(0)';
-        });
-      }, 400);
-
-      setTimeout(function() {
-        phoneTyping.style.display = '';
-        phoneTyping.style.opacity = '0';
-        phoneTyping.style.transform = 'translateY(8px)';
-        requestAnimationFrame(function() {
-          phoneTyping.style.transition = 'all 0.3s ease';
-          phoneTyping.style.opacity = '1';
-          phoneTyping.style.transform = 'translateY(0)';
-        });
-      }, 1800);
-
-      setTimeout(function() {
-        phoneReply2.style.display = '';
-        phoneReply2.style.opacity = '0';
-        phoneReply2.style.transform = 'translateY(8px)';
-        requestAnimationFrame(function() {
-          phoneReply2.style.transition = 'all 0.3s ease';
-          phoneReply2.style.opacity = '1';
-          phoneReply2.style.transform = 'translateY(0)';
-        });
-      }, 3000);
-    });
-  }
-
-  // ========== FAQ ACCORDION ==========
-  var faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(function(item) {
-    var btn = item.querySelector('.faq-item__q');
-    if (btn) {
-      btn.addEventListener('click', function() {
-        var isActive = item.classList.contains('active');
-        faqItems.forEach(function(i) { i.classList.remove('active'); });
-        if (!isActive) item.classList.add('active');
-      });
-    }
-  });
-
-  // ========== SCROLL TO TOP ==========
-  var scrollTopBtn = document.getElementById('scrollTop');
-  if (scrollTopBtn) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 600) {
-        scrollTopBtn.classList.add('visible');
-      } else {
-        scrollTopBtn.classList.remove('visible');
-      }
-    }, { passive: true });
-    scrollTopBtn.addEventListener('click', function() {
+  /* ---------- наверх ---------- */
+  if (toTop) {
+    toTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
