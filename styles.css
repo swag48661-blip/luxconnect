@@ -120,48 +120,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: width 0.1s linear;
 }
 
-/* ============ ТОП-ПЛАШКА ============ */
-.topbar {
-  position: relative;
-  z-index: 1001;
-  border-bottom: 1px solid var(--line);
-  background: #0A0B0D;
-}
-.topbar__inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 10px var(--pad);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-.topbar__text b { color: var(--gold); font-weight: 500; }
-.topbar__link {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid var(--gold-35);
-  padding-bottom: 1px;
-  transition: color 0.4s, border-color 0.4s;
-}
-.topbar__link:hover { color: var(--gold-lt); border-color: var(--gold-lt); }
-.topbar__dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-  animation: blink 2.6s ease-in-out infinite;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gold-35); }
-  50% { opacity: 0.45; box-shadow: 0 0 0 6px rgba(201, 169, 97, 0); }
-}
-
 /* ============ НАВИГАЦИЯ ============ */
 .nav {
   position: sticky;
@@ -1653,7 +1611,6 @@ html.js .anim.is-visible { opacity: 1; transform: none; }
 
 @media (max-width: 720px) {
   .section { padding: 72px 0; }
-  .topbar__inner { font-size: 0.62rem; letter-spacing: 0.08em; gap: 8px; }
   .hero { padding: 44px 0 72px; }
   .hero__visual { min-height: 0; }
   .chip-float { position: static; display: inline-block; margin-bottom: 16px; animation: none; }
